@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EME FRIES - Malindi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FAE9D0;
+  --cream2:#F5DFC0;
+  --red:#A81B1E;
+  --red-dark:#7C1215;
+  --brown:#571410;
+  --yellow:#F7B32B;
+  --card:#FFF6E6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--brown);
+  font-family:'Baloo 2',cursive;
+  overflow-x:hidden;
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3,.font-title{font-family:'Bungee',cursive;font-weight:400}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* burger parts */
+.part{position:absolute;left:50%;opacity:0;will-change:transform}
+#patty{
+  width:62%;height:11%;border-radius:999px;
+  background:radial-gradient(ellipse at 40% 30%,#8a4a24,#5e2c10 70%);
+  box-shadow:0 6px 0 rgba(0,0,0,.12), inset 0 3px 6px rgba(255,255,255,.18);
+  transform:translate(-50%,-50%);
+}
+#cheese{
+  width:66%;height:7%;border-radius:8px;top:0;
+  background:linear-gradient(#FFC93C,#F0A500);
+  transform:translate(-50%,-50%) rotate(-2deg);
+  box-shadow:0 2px 0 rgba(0,0,0,.08);
+}
+#dripwrap{position:absolute;left:50%;top:0;width:66%;height:0;transform:translateX(-50%);z-index:3}
+.drip{position:absolute;top:0;width:9px;height:0;border-radius:0 0 9px 9px;background:linear-gradient(#FFC93C,#E8960C)}
+#buntop{
+  width:70%;height:26%;top:-4%;border-radius:50% 50% 22% 22%/70% 70% 30% 30%;
+  background:radial-gradient(ellipse at 35% 25%,#F2A65A,#C97B33 75%);
+  box-shadow:inset 0 -6px 10px rgba(0,0,0,.12), 0 6px 0 rgba(0,0,0,.1);
+  transform:translate(-50%,-50%);
+}
+#buntop::after{ /* sesame */
+  content:'';position:absolute;inset:18% 22% 30% 22%;
+  background:
+    radial-gradient(circle at 20% 40%,#FFE1A8 0 6%,transparent 7%),
+    radial-gradient(circle at 55% 25%,#FFE1A8 0 6%,transparent 7%),
+    radial-gradient(circle at 78% 45%,#FFE1A8 0 6%,transparent 7%),
+    radial-gradient(circle at 40% 65%,#FFE1A8 0 5%,transparent 6%),
+    radial-gradient(circle at 68% 70%,#FFE1A8 0 5%,transparent 6%);
+}
+#lettuce{
+  width:72%;height:6%;top:0;border-radius:999px;
+  background:repeating-linear-gradient(90deg,#7CB542 0 14px,#6AA337 14px 22px);
+  transform:translate(-50%,-50%);
+}
+#tomato{
+  width:64%;height:6%;top:0;border-radius:999px;
+  background:radial-gradient(ellipse at 30% 40%,#E5533C,#B92E1F 75%);
+  transform:translate(-50%,-50%);
+}
+#bunbot{
+  width:70%;height:16%;bottom:2%;border-radius:18% 18% 40% 40%/30% 30% 70% 70%;
+  background:radial-gradient(ellipse at 40% 30%,#E8A45E,#C07A34 80%);
+  transform:translate(-50%,-50%);
+  box-shadow:inset 0 4px 8px rgba(255,255,255,.2), 0 6px 0 rgba(0,0,0,.1);
+}
+
+/* ============ HEADER ============ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1.2rem;
+  background:linear-gradient(rgba(250,233,208,.96),rgba(250,233,208,.88));
+  border-bottom:2px solid rgba(87,20,16,.08);
+  backdrop-filter:blur(6px);
+}
+.logo{font-family:'Bungee',cursive;font-size:clamp(1.1rem,3.5vw,1.6rem);color:var(--brown);letter-spacing:.02em}
+.logo span{color:var(--red)}
+nav a{
+  font-weight:800;color:var(--brown);text-decoration:none;margin-left:1.4rem;
+  font-size:.95rem;position:relative;
+}
+nav a::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:3px;background:var(--red);border-radius:2px;transition:width .25s cubic-bezier(.34,1.56,.64,1)}
+nav a:hover::after{width:100%}
+@media(max-width:640px){nav{display:none}}
+
+/* ============ HERO ============ */
+#hero{
+  min-height:100svh;display:flex;align-items:center;justify-content:center;
+  position:relative;padding:5rem 1rem 4rem;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(247,179,43,.14),transparent 22%),
+    radial-gradient(circle at 90% 85%,rgba(168,27,30,.08),transparent 25%),
+    var(--cream);
+  overflow:hidden;
+}
+/* doodle outlines */
+.doodle{position:absolute;opacity:.14;color:var(--brown);pointer-events:none}
+.hero-wrap{position:relative;width:min(92vmin,620px);aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+#ring{position:absolute;inset:0}
+
+/* ============ SKYDIVE-STYLE LOAD SEQUENCE ============ */
+/* stage 1: flame alone */
+.l-in{opacity:0;filter:blur(12px);transform:translateY(14px) scale(.96)}
+.l-show{opacity:1;filter:blur(0);transform:none;transition:opacity .9s ease,filter .9s ease,transform .9s cubic-bezier(.22,1,.36,1)}
+.hero-center .flame{transition-delay:.15s}
+.hero-center .hero-title{transition-delay:.55s}
+.hero-center .tagline{transition-delay:.95s}
+.hero-center .hero-btns{transition-delay:1.25s}
+/* stage 4: cards pop in staggered */
+.food-card{opacity:0;transform:translate(-50%,-50%) scale(.3)}
+.food-card.pop{opacity:1;transform:translate(-50%,-50%) scale(1);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.34,1.4,.5,1)}
+.food-card{
+  position:absolute;width:19%;aspect-ratio:1;border-radius:22%;
+  background:var(--card);box-shadow:0 8px 24px rgba(87,20,16,.12);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  transition:box-shadow .3s;
+}
+.food-card img{width:100%;height:100%;object-fit:cover}
+.food-card:hover{box-shadow:0 14px 34px rgba(168,27,30,.25);z-index:5}
+/* the burger card the intro burger lands in */
+#burgerCard{background:#fff}
+#burgerCard .landed{width:100%;height:100%;object-fit:cover}
+.hero-center{text-align:center;z-index:2;max-width:90%}
+.flame{width:clamp(60px,15vmin,100px);margin:2rem auto .3rem;filter:drop-shadow(0 4px 0 rgba(87,20,16,.15))}
+.hero-title{
+  font-size:clamp(2.6rem,11vmin,4.6rem);line-height:.95;color:var(--brown);
+  text-shadow:0 3px 0 var(--cream2), 0 6px 0 rgba(87,20,16,.12);
+}
+.hero-title .red{color:var(--red);-webkit-text-stroke:2px var(--brown)}
+.tagline{
+  font-size:clamp(1.05rem,3.4vmin,1.5rem);font-weight:800;margin:.8rem 0 1.4rem;
+}
+.tagline .i{font-style:italic;color:var(--red)}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;border-radius:999px;
+  font-weight:800;font-size:clamp(1rem,3vmin,1.25rem);
+  padding:.75em 1.9em;transition:transform .15s cubic-bezier(.34,1.56,.64,1),box-shadow .15s;
+  text-decoration:none;
+}
+.btn:active{transform:scale(.94)}
+.btn-ghost{background:var(--cream);color:var(--brown);border:3px solid var(--brown);box-shadow:0 4px 0 var(--brown)}
+.btn-ghost:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--brown)}
+.btn-solid{background:var(--red);color:var(--cream);border:3px solid var(--red);box-shadow:0 4px 0 var(--red-dark);margin-top:.7rem}
+.btn-solid:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--red-dark)}
+.hero-btns{display:flex;flex-direction:column;align-items:center;gap:.35rem}
+
+/* ============ MARQUEE ============ */
+.marquee{
+  background:var(--red);color:var(--cream);overflow:hidden;padding:.8rem 0;
+  transform:rotate(-1.2deg) scale(1.02);box-shadow:0 6px 20px rgba(124,18,21,.25);
+}
+.marquee-inner{display:flex;gap:2.5rem;white-space:nowrap;animation:slide 22s linear infinite;width:max-content}
+.marquee span{font-family:'Bungee',cursive;font-size:clamp(1rem,3vw,1.4rem);letter-spacing:.05em}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============ SECTIONS ============ */
+section{padding:5rem 1.2rem;max-width:1100px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:2.6rem}
+.kicker{
+  display:inline-block;background:var(--yellow);color:var(--brown);
+  font-weight:800;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.3rem 1rem;border-radius:999px;transform:rotate(-2deg);
+  box-shadow:0 3px 0 var(--brown);
+}
+.sec-head h2{font-size:clamp(1.8rem,6vw,3rem);margin-top:.9rem;line-height:1.05}
+.sec-head p{font-weight:700;opacity:.75;margin-top:.5rem;font-size:1.05rem}
+
+/* menu */
+#menu{background:var(--cream)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem}
+.dish{
+  background:var(--card);border-radius:26px;overflow:hidden;
+  box-shadow:0 8px 24px rgba(87,20,16,.1);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s;
+  display:flex;flex-direction:column;
+  animation:rise .7s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}}
+.dish:hover{transform:translateY(-8px) rotate(-1deg);box-shadow:0 18px 40px rgba(168,27,30,.18)}
+.dish .ph{aspect-ratio:1;overflow:hidden;position:relative}
+.dish .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.dish:hover .ph img{transform:scale(1.08) rotate(2deg)}
+.dish .badge{
+  position:absolute;top:10px;left:10px;background:var(--red);color:var(--cream);
+  font-size:.7rem;font-weight:800;padding:.25rem .6rem;border-radius:999px;
+  transform:rotate(-3deg);letter-spacing:.05em;
+}
+.dish .body{padding:1rem 1.1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+.dish h3{font-size:1rem;line-height:1.25}
+.dish .desc{font-size:.85rem;font-weight:600;opacity:.7;margin:.35rem 0 .7rem;flex:1}
+.dish .row{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.price{font-family:'Bungee',cursive;font-size:1.05rem;color:var(--red)}
+.order-btn{
+  background:var(--brown);color:var(--cream);border-radius:999px;font-weight:800;
+  padding:.5em 1.2em;font-size:.9rem;box-shadow:0 3px 0 #2e0a08;
+  transition:transform .15s cubic-bezier(.34,1.56,.64,1),background .2s;
+  display:inline-flex;align-items:center;gap:.4rem;
+}
+.order-btn:active{transform:scale(.9) translateY(2px);box-shadow:none}
+.order-btn:hover{background:var(--red)}
+.order-btn.added{background:#3E8E41;box-shadow:0 3px 0 #22521f}
+
+/* silly law section */
+#law{max-width:760px;text-align:center}
+.law-card{
+  background:#fff;border:3px solid var(--brown);border-radius:28px;padding:2.2rem 1.6rem;
+  box-shadow:8px 8px 0 var(--yellow);transform:rotate(-1deg);
+}
+.law-card h2{font-size:clamp(1.4rem,5vw,2.2rem)}
+.law-card p{font-weight:700;margin-top:.8rem;font-size:1.05rem}
+.law-card .fine{color:var(--red);font-family:'Bungee',cursive;margin-top:1rem;font-size:1rem}
+
+/* location / footer */
+footer{background:var(--red);color:var(--cream);margin-top:2rem;position:relative;overflow:hidden}
+footer::before{
+  content:'';position:absolute;top:-30px;left:0;right:0;height:60px;
+  background:var(--cream);border-radius:0 0 50% 50%/0 0 100% 100%;
+}
+.foot-inner{max-width:900px;margin:0 auto;padding:5rem 1.2rem 2.5rem;text-align:center;position:relative}
+.foot-inner h2{font-size:clamp(1.8rem,6vw,2.8rem)}
+.foot-inner .addr{font-weight:700;opacity:.9;margin:.8rem 0 1.4rem}
+.hours{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.6rem}
+.hours span{background:rgba(255,255,255,.12);padding:.4rem 1rem;border-radius:999px;font-weight:800;font-size:.9rem}
+.wa{
+  display:inline-flex;align-items:center;gap:.6rem;background:#25D366;color:#fff;
+  font-weight:800;border-radius:999px;padding:.8em 1.8em;text-decoration:none;
+  font-size:1.05rem;box-shadow:0 4px 0 #1a8f47;transition:transform .15s;
+}
+.wa:active{transform:scale(.94)}
+.foot-note{margin-top:2.2rem;font-size:.8rem;opacity:.65;font-weight:700}
+
+/* order tray */
+#tray{
+  position:fixed;bottom:1rem;left:50%;transform:translateX(-50%) translateY(140%);
+  background:var(--brown);color:var(--cream);border-radius:999px;z-index:200;
+  display:flex;align-items:center;gap:.8rem;padding:.55rem .6rem .55rem 1.2rem;
+  box-shadow:0 10px 30px rgba(46,10,8,.4);transition:transform .45s cubic-bezier(.34,1.56,.64,1);
+  max-width:94vw;
+}
+#tray.up{transform:translateX(-50%) translateY(0)}
+#tray .count{
+  background:var(--yellow);color:var(--brown);font-family:'Bungee',cursive;
+  border-radius:50%;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;font-size:.9rem;
+}
+#tray button{
+  background:#25D366;color:#fff;font-weight:800;border-radius:999px;padding:.5em 1.1em;
+}
+#tray .clear{background:none;color:var(--cream);opacity:.6;font-weight:700;padding:.4rem}
+
+/* toast */
+#toast{
+  position:fixed;bottom:5.5rem;left:50%;transform:translateX(-50%) scale(.8);opacity:0;
+  background:#fff;color:var(--brown);font-weight:800;border-radius:999px;
+  padding:.6rem 1.3rem;z-index:210;pointer-events:none;
+  box-shadow:0 10px 30px rgba(87,20,16,.2);transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  white-space:nowrap;
+}
+#toast.show{opacity:1;transform:translateX(-50%) scale(1)}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(34px);transition:all .8s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion: reduce){
+  #ring,.marquee-inner{animation:none!important}
+  .l-in{opacity:1;filter:none;transform:none}
+  .food-card{opacity:1;transform:translate(-50%,-50%)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">EME <span>FRIES</span></div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#law">The Law</a>
+    <a href="#find">Find Us</a>
+  </nav>
+</header>
+
+<!-- ======= HERO ======= -->
+<section id="hero">
+  <svg class="doodle" style="top:12%;left:4%;width:80px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 10c0-4 4-7 8-7s8 3 8 7-4 7-8 7-8-3-8-7zm4 7v4m8-4v4M8 21h4m4 0h1"/></svg>
+  <svg class="doodle" style="bottom:10%;right:5%;width:90px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="16" height="10" rx="2"/><path d="M6 8c0-2 2-4 6-4s6 2 6 4M4 12h16"/></svg>
+  <div class="hero-wrap">
+    <div id="ring"></div>
+    <div class="hero-center">
+      <svg class="flame l-in" viewBox="0 0 64 64"><path fill="#A81B1E" d="M32 2c4 10-6 14-6 22 0 5 3 8 6 8s6-3 6-8c8 4 12 10 12 18 0 12-8 20-18 20S14 54 14 42c0-10 6-16 10-22 2 4 6 5 6 2 0-6-2-12 2-20z"/><circle cx="32" cy="44" r="7" fill="#7C1215"/></svg>
+      <h1 class="hero-title l-in">EME<br><span class="red">FRIES</span></h1>
+      <p class="tagline l-in">Fresh. Crispy. <span class="i">Irresistible.</span></p>
+      <div class="hero-btns l-in">
+        <a href="#menu" class="btn btn-ghost">See Menu &rsaquo;</a>
+        <a href="#find" class="btn btn-solid">Order Now &rsaquo;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= MARQUEE ======= -->
+<div class="marquee"><div class="marquee-inner" id="mq"></div></div>
+
+<!-- ======= MENU ======= -->
+<section id="menu">
+  <div class="sec-head rv">
+    <span class="kicker">The evidence</span>
+    <h2>THE MENU</h2>
+    <p>Eat responsibly. Or don't. We're not your mum.</p>
+  </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- ======= LAW ======= -->
+<section id="law">
+  <div class="law-card rv">
+    <span class="kicker">Public notice</span>
+    <h2>OFFICIAL NOTICE: EXTREMELY GOOD FOOD AHEAD</h2>
+        <p>Malindi taste inspectors have confirmed our cheese pull is officially "unreasonably long". Eyewitnesses across the county agree: our fries have a habit of disappearing within four minutes of purchase. Nobody has ever found the leftovers. Nobody ever will.</p>
+    <p class="fine">Side effects include: ordering again tomorrow. And telling three friends.</p>
+  </div>
+</section>
+
+<!-- ======= FOOTER / FIND US ======= -->
+<footer id="find">
+  <div class="foot-inner">
+    <h2 class="rv">COME SEE US IN MALINDI</h2>
+    <p class="addr rv">Eme Fries - Malindi, Kilifi County, Kenya. Follow the smell.</p>
+    <div class="hours rv">
+      <span>Mon - Sun</span><span>10:00 - 22:00</span><span>Fries never sleep. We do.</span>
+    </div>
+    <a class="wa rv" id="waBig" href="#" target="_blank" rel="noopener">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 14.2c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1a14 14 0 0 1-1.9-.7c-2.6-1.1-4.3-3.7-4.4-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.2.1.4 0 .6l-.4.6c-.2.2-.4.4-.2.7.2.4.9 1.4 1.9 2.3 1.3 1.2 2.4 1.5 2.7 1.7.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.7-.1l2 1c.3.1.5.2.5.4.1 0 .1.5-.3 1.3z"/></svg>
+      Order on WhatsApp
+    </a>
+    <p class="foot-note">EME FRIES Malindi. Fresh. Crispy. Irresistible. All rights to the crunch reserved.</p>
+  </div>
+</footer>
+
+<div id="tray">
+  <div class="count" id="trayCount">0</div>
+  <span id="trayLabel" style="font-weight:800">in your basket</span>
+  <button class="clear" id="trayClear">clear</button>
+  <button id="trayOrder">Send order</button>
+</div>
+<div id="toast"></div>
+
+<script>
+/* ================= CONFIG ================= */
+const WA_NUMBER = '254757569646'; // EME FRIES WhatsApp ordering line
+const IMG = p => 'img/' + p;
+
+const RING = [
+  'fries.webp','pizza.webp','shake.webp','chicken.webp','hotdog.webp','donut.webp',
+  'nuggets.webp','taco.webp','pancakes.webp','cupcake.webp','wrap.webp','icecream.webp',
+  'cola.webp','cookie.webp'
+];
+
+const MENU = [
+  {img:'burger.webp',   name:'The Emefather',        desc:'Double patty, double cheese, zero regrets. The burger that started the rumours.', price:450, badge:'LEGENDARY'},
+  {img:'fries.webp',    name:'Eme Fries (obviously)',desc:'The reason we have a name. Crispy outside, cloud inside, gone in 4 minutes.', price:180, badge:'HOUSE RULE'},
+  {img:'chicken.webp',  name:'Crimesploshion Chicken', desc:'So crunchy the neighbours will know. Comes with sauce you will drink by accident.', price:380},
+  {img:'pizza.webp',    name:'Malindi Pepperoni Slice', desc:'Cheese stretch measured in metres. We are not sorry.', price:250, badge:'CHEESE PULL'},
+  {img:'hotdog.webp',   name:'The Long Story',       desc:'A hotdog with mustard, ketchup and absolutely no chill.', price:200},
+  {img:'nuggets.webp',  name:'Nugget Conspiracy',    desc:'8 nuggets. One sauce. Nobody has ever stopped at 8.', price:220},
+  {img:'taco.webp',     name:'Crunchy Alibi',        desc:'Beef, lettuce, cheese, all wrapped up in a questionable alibi.', price:230},
+  {img:'wrap.webp',     name:'The Witness Wrap',     desc:'Grilled chicken saw everything. It is not talking. It is delicious.', price:280},
+  {img:'donut.webp',    name:'Pink Felony Donut',    desc:'Pink glaze, rainbow sprinkles, 100% admissible in court.', price:150},
+  {img:'shake.webp',    name:'Chocolate get-away Car', desc:'Thick enough that the straw files a complaint.', price:250},
+  {img:'icecream.webp', name:'Soft Serve al Fresco', desc:'Vanilla soft serve. Melts faster than your excuses.', price:120},
+  {img:'pancakes.webp', name:'Pancake Stack Attack', desc:'Butter, syrup, and a stack with structural ambitions.', price:300, badge:'BREAKINFAST'},
+];
+
+/* ================= RING (skydive-style: positions travel slowly, cards never tilt) ================= */
+const ring = document.getElementById('ring');
+const heroWrap = document.querySelector('.hero-wrap');
+const orbiters = [];
+const LAP_SECONDS = 240; // one full lap in 4 minutes
+const STEP_PER_FRAME = (Math.PI*2) / (LAP_SECONDS*60);
+RING.forEach((f,i)=>{
+  const n = RING.length;
+  const c = document.createElement('div');
+  c.className = 'food-card';
+  c.innerHTML = '<img src="'+IMG(f)+'" alt="">';
+  const ang = ((i+1)/n)*Math.PI*2 - Math.PI/2;
+  c.style.left = (50 + 44*Math.cos(ang)) + '%';   // position at its slot from birth,
+  c.style.top  = (50 + 44*Math.sin(ang)) + '%';   // so it appears IN PLACE
+  ring.appendChild(c);
+  orbiters.push({el:c, a:ang});
+});
+const burgerCard = document.createElement('div');
+burgerCard.className='food-card'; burgerCard.id='burgerCard';
+burgerCard.innerHTML='<img class="landed" src="'+IMG('burger.webp')+'" alt="Emefather burger">';
+burgerCard.style.left='50%'; burgerCard.style.top='6%';
+ring.appendChild(burgerCard);
+const burgerOrb = {el:burgerCard, a:-Math.PI/2};
+orbiters.push(burgerOrb);
+
+function orbit(ms){
+  const s = ms/1000;
+  const w = heroWrap.clientWidth, h = heroWrap.clientHeight;
+  const rx = w*0.44, ry = h*0.44;
+  for(let k=0;k<orbiters.length;k++){
+    const o = orbiters[k];
+    const breathe = Math.sin(s*0.8 + k*1.3)*4; // gentle sway, never a shake, always upright
+    o.el.style.left = (50 + (rx/w)*100*Math.cos(o.a)) + '%';
+    o.el.style.top  = (50 + (ry/h)*100*Math.sin(o.a) - breathe) + '%';
+    o.a += STEP_PER_FRAME;
+  }
+  requestAnimationFrame(orbit);
+}
+
+/* ================= MARQUEE ================= */
+const mqText = 'FRESH. CRISPY. IRRESISTIBLE. &nbsp;&bull;&nbsp; EME FRIES MALINDI &nbsp;&bull;&nbsp; THE CHEESE PULL IS REAL &nbsp;&bull;&nbsp; ';
+document.getElementById('mq').innerHTML = ('<span>'+mqText+'</span>').repeat(4);
+
+/* ================= MENU ================= */
+const grid = document.getElementById('menuGrid');
+MENU.forEach((m,i)=>{
+  const el = document.createElement('article');
+  el.className='dish'; el.style.animationDelay = (i*0.07)+'s';
+  el.innerHTML =
+    '<div class="ph"><img loading="lazy" src="'+IMG(m.img)+'" alt="'+m.name+'">'+
+    (m.badge?'<span class="badge">'+m.badge+'</span>':'')+'</div>'+
+    '<div class="body"><h3>'+m.name+'</h3><p class="desc">'+m.desc+'</p>'+
+    '<div class="row"><span class="price">KSh '+m.price+'</span>'+
+    '<button class="order-btn">Order now</button></div></div>';
+  el.querySelector('.order-btn').addEventListener('click', e=>addToCart(m, e.currentTarget));
+  grid.appendChild(el);
+});
+
+/* ================= CART ================= */
+let cart = [];
+const tray = document.getElementById('tray');
+function addToCart(m, btn){
+  cart.push(m);
+  document.getElementById('trayCount').textContent = cart.length;
+  document.getElementById('trayLabel').textContent =
+    cart.length===1 ? m.name : cart.length + ' items ready to commit';
+  tray.classList.add('up');
+  sfx.pop();
+  btn.classList.add('added'); btn.textContent='Added \u2713';
+  setTimeout(()=>{btn.classList.remove('added'); btn.textContent='Order now';},1200);
+  toast(m.name + ' secured. Good choice.');
+}
+document.getElementById('trayClear').onclick = ()=>{cart=[]; tray.classList.remove('up');};
+document.getElementById('trayOrder').onclick = sendOrder;
+document.getElementById('waBig').onclick = e=>{e.preventDefault(); if(cart.length) sendOrder(); else window.open(waURL('Habari EME FRIES! I want fries. A lot of them.'),'_blank');};
+function waURL(text){return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);}
+function sendOrder(){
+  if(!cart.length){toast('Your basket is empty. Fix that.');return;}
+  const lines = cart.map((m,i)=>(i+1)+'. '+m.name+' - KSh '+m.price).join('\n');
+  const total = cart.reduce((s,m)=>s+m.price,0);
+  window.open(waURL('Habari EME FRIES! I would like to commit the following:\n\n'+lines+'\n\nTotal: KSh '+total+'\n\nName: \nDelivery spot: '),'_blank');
+}
+let toastTimer;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ================= SOUND (all synthesized, no files) ================= */
+const sfx = (()=>{
+  let ctx;
+  const ac = ()=> ctx || (ctx = new (window.AudioContext||window.webkitAudioContext)());
+  function env(g, t0, a, d, peak){ g.gain.setValueAtTime(0.0001,t0); g.gain.exponentialRampToValueAtTime(peak,t0+a); g.gain.exponentialRampToValueAtTime(0.0001,t0+a+d); }
+  function thud(freq=90, dur=.25, vol=.5){
+    const c=ac(), t=c.currentTime, o=c.createOscillator(), g=c.createGain();
+    o.type='sine'; o.frequency.setValueAtTime(freq*2.4,t); o.frequency.exponentialRampToValueAtTime(freq,t+.12);
+    env(g,t,.008,dur,vol); o.connect(g).connect(c.destination); o.start(t); o.stop(t+dur+.05);
+  }
+  function sizzle(dur=.6, vol=.15){
+    const c=ac(), t=c.currentTime, len=c.sampleRate*dur, buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*(1-i/len);
+    const s=c.createBufferSource(); s.buffer=buf;
+    const f=c.createBiquadFilter(); f.type='bandpass'; f.frequency.value=5200; f.Q.value=.6;
+    const g=c.createGain(); env(g,t,.05,dur,vol);
+    s.connect(f).connect(g).connect(c.destination); s.start(t);
+  }
+  function squelch(vol=.3){
+    const c=ac(), t=c.currentTime, o=c.createOscillator(), g=c.createGain(), lfo=c.createOscillator(), lg=c.createGain();
+    o.type='sawtooth'; o.frequency.setValueAtTime(300,t); o.frequency.exponentialRampToValueAtTime(70,t+.45);
+    lfo.frequency.value=9; lg.gain.value=60; lfo.connect(lg).connect(o.frequency);
+    env(g,t,.02,.5,vol); o.connect(g).connect(c.destination);
+    o.start(t); lfo.start(t); o.stop(t+.55); lfo.stop(t+.55);
+  }
+  function whoosh(dur=.4, vol=.2){
+    const c=ac(), t=c.currentTime, len=c.sampleRate*dur, buf=c.createBuffer(1,len,c.sampleRate), d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.sin(Math.PI*i/len);
+    const s=c.createBufferSource(); s.buffer=buf;
+    const f=c.createBiquadFilter(); f.type='bandpass';
+    f.frequency.setValueAtTime(300,t); f.frequency.exponentialRampToValueAtTime(2400,t+dur);
+    const g=c.createGain(); env(g,t,.05,dur,vol);
+    s.connect(f).connect(g).connect(c.destination); s.start(t);
+  }
+  function pop(){
+    const c=ac(), t=c.currentTime, o=c.createOscillator(), g=c.createGain();
+    o.type='triangle'; o.frequency.setValueAtTime(500,t); o.frequency.exponentialRampToValueAtTime(900,t+.06);
+    env(g,t,.005,.09,.25); o.connect(g).connect(c.destination); o.start(t); o.stop(t+.15);
+  }
+  return {thud,sizzle,squelch,whoosh,pop, ac};
+})();
+
+/* ================= (no intro) unlock sounds on first touch ================= */
+document.addEventListener('pointerdown', ()=>{ try{sfx.ac().resume();}catch(e){} }, {once:true});
+
+/* ================= SKYDIVE-STYLE LOAD SEQUENCE (the permanent one) =================
+   flame alone -> title+button blur->sharp
+   -> ring builds FROM THE TOP, fanning around the circle, each card fading in tiny->full in place
+   -> full circle -> slow upright lap with gentle breathing */
+function playLoadSequence(){
+  document.querySelectorAll('.hero-center .l-in').forEach(n=>n.classList.add('l-show'));
+  // order cards by angular distance from the top slot (burger card first), fan around the circle
+  const ordered = [...orbiters].sort((p,q)=>{
+    const d = a => Math.min(Math.abs(a - (-Math.PI/2)), Math.PI*2 - Math.abs(a - (-Math.PI/2)));
+    return d(p.a) - d(q.a);
+  });
+  ordered.forEach((o,i)=>{
+    setTimeout(()=>{
+      o.el.classList.add('pop');
+      if(i===ordered.length-1) setTimeout(()=>requestAnimationFrame(orbit), 700);
+    }, 1500 + i*95);
+  });
+}
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', ()=>setTimeout(playLoadSequence, 150));
+} else {
+  setTimeout(playLoadSequence, 150); // script runs at end of body, don't wait for images
+}
+
+/* ================= SCROLL REVEAL ================= */
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
