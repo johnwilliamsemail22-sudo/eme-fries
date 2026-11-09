@@ -2,12 +2,9 @@
 
 Fast-food restaurant website - Malindi, Kilifi County, Kenya.
 
-- Skydive-style load sequence: flame, blur-in title, ring of food cards fanning around the logo, slow upright orbit
+- Load sequence: flame mark, blur-in title, ring of food cards building from the top, slow upright orbit
 - Menu with Order Now buttons, floating basket, WhatsApp ordering (+254 757 569 646)
-- Static site: no build step, deploy `site/` anywhere
+- Static site: index.html + img/, no build step
 
 ## Deploy on Vercel
-1. Push this repo to your GitHub (or import directly)
-2. Vercel > Add New Project > Import this repo
-3. Framework preset: **Other**. Output directory: `site`
-4. Deploy
+Import this repo into Vercel, framework preset "Other", and deploy - index.html sits at the repo root, so zero configuration is needed.
